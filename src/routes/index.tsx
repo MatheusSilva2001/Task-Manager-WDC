@@ -1,10 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
 import { AuthRouter } from "./auth.routes";
+import { AppRouter } from "./app.routes";
 
 export function AppRoutes() {
-    const login = true;
+  const login = false;
 
-    const routes = login ? <AppRoutes/> : <AuthRouter/>; 
+  const routes = login ? <AppRouter /> : <AuthRouter />;
 
-    return <BrowserRouter>{routes}</BrowserRouter>
+  return <BrowserRouter>{routes}</BrowserRouter>;
 }
