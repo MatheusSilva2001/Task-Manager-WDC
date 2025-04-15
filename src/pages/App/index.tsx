@@ -13,10 +13,10 @@ export function App() {
         <section className="sideBar">
           <SideBar />
         </section>
-        <Outlet /> {/*main pages*/}
+        <Outlet /> {/* main pages */}
       </article>
 
-      <Footer/>
+      <Footer />
     </Container>
   );
 }

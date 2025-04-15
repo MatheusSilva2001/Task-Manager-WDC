@@ -17,7 +17,7 @@ export function Button({
 }: ButtonTypes) {
   return (
     <Container type={type} variant={variant} onClick={onClick} disabled={loading}>
-      {loading ? <img src={loadingGif} width={14}/> : title}
+      {loading ? <img src={loadingGif} width={14} /> : title}
     </Container>
   );
 }

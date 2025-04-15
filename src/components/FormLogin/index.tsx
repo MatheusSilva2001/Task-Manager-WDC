@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Container } from "./style";
 import { Button } from "../Button";
 
-type InputsType = {
+type InputsTypes = {
   email: string;
   password: string;
 };
@@ -13,12 +13,13 @@ export function FormLogin() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<InputsType>();
+  } = useForm<InputsTypes>();
 
-  const onSubmit: SubmitHandler<InputsType> = async ({ email, password }) => {
-    console.log(email, password);
+  const onSubmit: SubmitHandler<InputsTypes> = async ({ email, password }) => {
+    console.log({ email, password });
     reset();
   };
+
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -39,22 +40,22 @@ export function FormLogin() {
           </label>
           <span className="inputError">{errors.email?.message}</span>
         </section>
+
         <section>
           <label>
             Senha:
             <input
               type="password"
-              placeholder="Digite sua senha"
+              placeholder="digite sua senha"
               {...register("password", {
                 required: "Campo obrigatório",
-                },
-              )}
+              })}
             />
           </label>
           <span className="inputError">{errors.password?.message}</span>
         </section>
 
-        <Button title="Login" loading={false}/>
+        <Button title="Login" loading={false} />
       </form>
     </Container>
   );

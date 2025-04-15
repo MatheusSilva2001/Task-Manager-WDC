@@ -5,13 +5,14 @@ import { FormLogin } from "../../components/FormLogin";
 
 export function SignIn() {
   const navigate = useNavigate();
+
   return (
     <Container>
       <div className="signInLogo">
         <div>
           <h1>Task Manager</h1>
 
-          <Link to={"/"}>
+          <Link to={""}>
             <img src={logoReprogramaJucas} alt="" />
           </Link>
         </div>
@@ -19,11 +20,12 @@ export function SignIn() {
 
       <div className="signInForm">
         <h2>Faça seu login</h2>
+
         <FormLogin />
 
         <div className="messageChangePage">
           <span>Não tem conta? </span>
-          <button onClick={() => navigate("/sing-up")} disabled={false}>
+          <button onClick={() => navigate("/sign-up")} disabled={false}>
             Registre-se
           </button>
         </div>

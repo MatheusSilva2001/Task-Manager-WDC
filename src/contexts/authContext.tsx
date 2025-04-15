@@ -21,16 +21,14 @@ type AuthContextTypes = {
   isLoading: boolean;
 };
 
-export const AuthContext = createContext<AuthContextTypes>(
-  {} as AuthContextTypes
-);
+export const AuthContext = createContext<AuthContextTypes>({} as AuthContextTypes);
 
-export function authProvider({ children }: PropsWithChildren) {
+export function AuthProvider({ children }: PropsWithChildren) {
   const [authUserID, setAuthUserID] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   async function signIn({ email, password }: SignInTypes) {
-    if (!email || !password) throw alert("Por favor unformar email e senha");
+    if (!email || !password) throw alert("Por favor informar email e senha");
 
     setIsLoading(true);
 
@@ -53,21 +51,22 @@ export function authProvider({ children }: PropsWithChildren) {
   }
 
   async function signUp({ name, email, password }: SignUpTypes) {
-    if (!name || !email || !password) throw alert("Por favor unformar email e senha");
+    if (!name || !email || !password)
+      throw alert("Por favor informar nome, email e senha");
 
     setIsLoading(true);
 
     return API.post("/user", { name, email, password })
       .then((response) => {
-        if (response.data.status == 201){
-            alert("Usuário cadastrado com sucesso!")
+        if (response.data.status == 201) {
+          alert("Usuário cadastrado com sucesso!");
         }
 
         return true;
       })
       .catch((error) => {
         console.error(error);
-        alert("Erro ao cadastrar o usuário");
+        alert("Erro ao cadastrar usuário");
       })
       .finally(() => {
         setIsLoading(false);
@@ -79,15 +78,12 @@ export function authProvider({ children }: PropsWithChildren) {
     localStorage.removeItem(STORAGE_USERID_KEY);
 
     API.post("/logout").catch((error) => {
-        console.error(error);
-        
+      console.error(error);
     });
   }
 
   return (
-    <AuthContext.Provider
-      value={{signIn, signOut, signUp, authUserID, isLoading}}
-    >
+    <AuthContext.Provider value={{ signIn, signOut, signUp, authUserID, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,15 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
 import logoReprogramaJucas from "../../assets/logo-rj.png";
-import { FormSingUp } from "../../components/FormSignUp";
+import { FormSignUp } from "../../components/FormSignUp";
 
 export function SignUp() {
   const navigate = useNavigate();
+
   return (
     <Container>
       <div className="signUpForm">
         <h2>Crie sua conta</h2>
-        <FormSingUp />
+
+        <FormSignUp />
 
         <div className="messageChangePage">
           <span>Já tem uma conta? </span>
@@ -18,6 +20,7 @@ export function SignUp() {
           </button>
         </div>
       </div>
+
       <div className="signUpLogo">
         <div>
           <Link to={""}>

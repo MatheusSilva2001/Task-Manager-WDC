@@ -4,36 +4,32 @@ import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
-type InputsType = {
+type InputsTypes = {
   name: string;
   email: string;
   password: string;
 };
 
-export function FormSingUp() {
+export function FormSignUp() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<InputsType>();
+  } = useForm<InputsTypes>();
 
   const navigate = useNavigate();
-  const {signUp, isLoading} = useAuth();
+  const { signUp, isLoading } = useAuth();
 
+  const onSubmit: SubmitHandler<InputsTypes> = async ({ name, email, password }) => {
+    const isUserCreated = await signUp({ name, email, password });
 
-  const onSubmit: SubmitHandler<InputsType> = async ({
-    name,
-    email,
-    password,
-  }) => {
-    const isUserCreated = await signUp({ name, email, password});
-
-    if (isUserCreated){
-    navigate("/")
-    reset();
-    } 
+    if (isUserCreated) {
+      navigate("/");
+      reset();
+    }
   };
+
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,10 +41,7 @@ export function FormSingUp() {
               placeholder="Digite seu nome"
               {...register("name", {
                 required: "Campo obrigatório",
-                minLength: {
-                  value: 3,
-                  message: "O nome precisa ter no mínimo 3 caracteres",
-                },
+                minLength: { value: 3, message: "Mínimo de 3 caracteres" },
                 pattern: {
                   value: /^[a-zA-Z\s]+$/i,
                   message: "Apenas letras são permitidas",
@@ -58,6 +51,7 @@ export function FormSingUp() {
           </label>
           <span className="inputError">{errors.name?.message}</span>
         </section>
+
         <section>
           <label>
             Email:
@@ -75,12 +69,13 @@ export function FormSingUp() {
           </label>
           <span className="inputError">{errors.email?.message}</span>
         </section>
+
         <section>
           <label>
             Senha:
             <input
               type="password"
-              placeholder="Digite sua senha"
+              placeholder="digite sua senha"
               {...register("password", {
                 required: "Campo obrigatório",
                 minLength: {
@@ -88,8 +83,7 @@ export function FormSingUp() {
                   message: "A senha deve ter no mínimo 7 dígitos",
                 },
                 pattern: {
-                  value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?,./\\[\]-]).+$/,
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?,./\\[\]-]).+$/,
                   message:
                     "A senha deve ter número, letra maiúscula e caractere especial",
                 },

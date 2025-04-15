@@ -15,11 +15,10 @@ export const Container = styled.button<ButtonContainerStyles>`
   font-weight: 700;
   padding: 1.2rem;
   width: 100%;
-  margin:  0 auto;
+  margin: 0 auto;
   transition: 100ms;
 
   &:hover {
-    cursor: default;
     filter: brightness(0.9);
   }
 
@@ -28,7 +27,7 @@ export const Container = styled.button<ButtonContainerStyles>`
     filter: brightness(0.8);
   }
 
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     font-size: 1.6rem;
   }
 `;
