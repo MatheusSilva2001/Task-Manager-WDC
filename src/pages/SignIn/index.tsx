@@ -2,9 +2,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
 import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
 import { FormLogin } from "../../components/FormLogin";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 export function SignIn() {
   const navigate = useNavigate();
+  const { isLoading } = useAuth();
+  const [delay, setDelay] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDelay(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (delay) {
+    return null;
+  }
 
   return (
     <Container>
@@ -25,7 +41,7 @@ export function SignIn() {
 
         <div className="messageChangePage">
           <span>Não tem conta? </span>
-          <button onClick={() => navigate("/sign-up")} disabled={false}>
+          <button onClick={() => navigate("/sign-up")} disabled={isLoading}>
             Registre-se
           </button>
         </div>
