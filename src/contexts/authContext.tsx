@@ -21,9 +21,7 @@ type AuthContextTypes = {
   isLoading: boolean;
 };
 
-export const AuthContext = createContext<AuthContextTypes>(
-  {} as AuthContextTypes
-);
+export const AuthContext = createContext<AuthContextTypes>({} as AuthContextTypes);
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [authUserID, setAuthUserID] = useState("");
@@ -100,6 +98,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         })
         .catch((error) => {
           console.error(error);
+
           if (error.response.status == 401) {
             signOut();
           }
@@ -108,9 +107,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{ signIn, signOut, signUp, authUserID, isLoading }}
-    >
+    <AuthContext.Provider value={{ signIn, signOut, signUp, authUserID, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -9,9 +9,10 @@ interface TaskContextProps {
   deleteTask: (id: string) => Promise<boolean | void>;
   isLoading: boolean;
 }
+
 export const TaskContext = createContext({} as TaskContextProps);
 
-export function TaskProvider({ children }: { children: ReactNode }) {
+export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [taskData, setTaskData] = useState({} as TaskDataTypes);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,11 +34,10 @@ export function TaskProvider({ children }: { children: ReactNode }) {
         setIsLoading(false);
       });
   }
+
   return (
-    <TaskContext.Provider
-      value={{ taskData, setTaskData, deleteTask, isLoading }}
-    >
+    <TaskContext.Provider value={{ taskData, setTaskData, deleteTask, isLoading }}>
       {children}
     </TaskContext.Provider>
   );
-}
+};

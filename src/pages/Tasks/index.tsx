@@ -10,16 +10,9 @@ import { useTask } from "../../hooks/useTask";
 export function Tasks() {
   const [showModalTaskDetails, setShowModalTaskDetails] = useState(false);
   const { setTaskData } = useTask();
-  const {
-    data,
-    isLoading,
-    error,
-    changeLimit,
-    page,
-    totalPages,
-    prevPage,
-    nextPage,
-  } = useQueryTasks();
+
+  const { data, isLoading, error, changeLimit, page, totalPages, prevPage, nextPage } =
+    useQueryTasks();
 
   function toggleModal() {
     setShowModalTaskDetails((prev) => (prev == true ? false : true));
@@ -49,7 +42,7 @@ export function Tasks() {
       {isLoading && <span className="loading">Carregando...</span>}
 
       {!isLoading && error && (
-        <span className="queryError">Erro na requisição das tarefas</span>
+        <span className="queryError">Erro na requisição das tarefas!</span>
       )}
 
       <div className="tasksContainer scrollBar">
@@ -61,14 +54,13 @@ export function Tasks() {
               <TaskCard
                 key={task.id}
                 data={task}
-                onClick={() => {
-                  addTaskToggleModal(task);
-                }}
+                onClick={() => addTaskToggleModal(task)}
               />
             );
           })
         )}
       </div>
+
       <div className="paginationMobile">
         <Pagination
           page={page}

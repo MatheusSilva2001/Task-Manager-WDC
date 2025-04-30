@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { API } from "../configs/api";
 import { UserDataTypes } from "../@types/user";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { TaskDataTypes } from "../@types/tasks";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 type FilterType = "all" | "completed" | "pending" | "late";
+
 type GetTasksProps = {
   page: number;
   limit: number;
@@ -22,13 +23,9 @@ export function useQueryTasks() {
   const location = useLocation();
   const searchParams = useSearchParams();
 
-  async function getTasks({
-    page = 1,
-    limit = 10,
-    filter = "all",
-  }: GetTasksProps) {
+  async function getTasks({ page = 1, limit = 10, filter = "all" }: GetTasksProps) {
     if (page <= 0) page = 1;
-    const offset = (page - 1) * limit;
+    const offset = limit * (page - 1);
 
     await changeTotalPages(filter, limit);
 
@@ -55,22 +52,25 @@ export function useQueryTasks() {
   function nextPage() {
     if (page < totalPages) {
       setPage((prev) => prev + 1);
-      navigate(`/tasks?page=${page + 1}&filter=${filter}`);
+      navigate(`?page=${page + 1}&filter=${filter}`);
     }
   }
+
   function prevPage() {
     if (page > 1) {
       setPage((prev) => prev - 1);
-      navigate(`/tasks?page=${page - 1}&filter=${filter}`);
+      navigate(`?page=${page - 1}&filter=${filter}`);
     }
   }
 
   function changePage(value: number) {
     setPage(value);
   }
+
   function changeLimit(value: number) {
     setLimit(value);
   }
+
   function changeFilter(value: FilterType) {
     setFilter(value);
   }
@@ -102,7 +102,7 @@ export function useQueryTasks() {
   const query = useQuery({
     queryKey: ["tasksData", page, limit, filter],
     queryFn: () => getTasks({ page, limit, filter }),
-    refetchInterval: 1000 * 60 * 1, // 1 minute,
+    refetchInterval: 1000 * 60 * 1, // 1 minute
   });
 
   return {

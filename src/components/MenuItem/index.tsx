@@ -9,10 +9,7 @@ type MenuProps = {
 export function MenuItem({ title, icon, onClick }: MenuProps) {
   return (
     <Container>
-      <i
-        className="material-icons"
-        onClick={onClick}
->
+      <i className="material-icons" onClick={onClick}>
         {icon}
       </i>
       <span>{title}</span>

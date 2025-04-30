@@ -25,6 +25,7 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
       handleToggleSideBar();
     }
   }
+
   function handleLogoutKeyUp(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key == "Enter") {
       handleLogoutApp();
@@ -36,8 +37,8 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
         <i
           className="material-icons closeIcon"
           onClick={handleToggleSideBar}
-          tabIndex={0}
           onKeyUp={handleCloseKeyUp}
+          tabIndex={0}
         >
           close
         </i>
@@ -47,21 +48,20 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
             <NavLink to={"/"} onClick={handleToggleSideBar}>
               <MenuItem title="Home" icon="home" />
             </NavLink>
+
             <NavLink to={"/tasks?filter=all&page=1"} onClick={handleToggleSideBar}>
               <MenuItem title="Tarefas" icon="task" />
             </NavLink>
+
             <NavLink to={"/create-tasks"} onClick={handleToggleSideBar}>
               <MenuItem title="Adicionar" icon="add_circle" />
             </NavLink>
+
             <NavLink to={"/about"} onClick={handleToggleSideBar}>
               <MenuItem title="Sobre" icon="info" />
             </NavLink>
 
-            <div
-              onClick={handleLogoutApp}
-              onKeyUp={handleLogoutKeyUp}
-              tabIndex={0}
-            >
+            <div onClick={handleLogoutApp} onKeyUp={handleLogoutKeyUp} tabIndex={0}>
               <MenuItem title="Sair" icon="exit_to_app" />
             </div>
           </ul>

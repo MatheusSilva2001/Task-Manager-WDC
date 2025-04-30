@@ -37,7 +37,7 @@ export function FormSignUp() {
           <label>
             Nome:
             <input
-            autoFocus
+              autoFocus
               type="text"
               placeholder="Digite seu nome"
               {...register("name", {

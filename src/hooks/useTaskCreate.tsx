@@ -3,23 +3,22 @@ import { TaskDataTypes } from "../@types/tasks";
 import { API } from "../configs/api";
 import { toast } from "react-toastify";
 
-async function CreateTask(data: TaskDataTypes) {
-    return await API.post("/task", data);
+async function createTask(data: TaskDataTypes) {
+  return await API.post("/task", data);
 }
 
 export const useTaskCreate = () => {
-    const mutate = useMutation({
-        mutationFn: CreateTask,
-        onSuccess: () => {
-            toast.dismiss();
-            toast.success("Tarefa criada com sucesso!");
-        },
+  const mutate = useMutation({
+    mutationFn: createTask,
+    onSuccess: () => {
+      toast.dismiss();
+      toast.success("Tarefa criada com sucesso");
+    },
+    onError: () => {
+      toast.dismiss();
+      toast.success("Erro ao criar tarefa");
+    },
+  });
 
-        onError: () => {
-            toast.dismiss();
-            toast.success("Erro ao criar tarefa");
-        },
-    });
-
-    return mutate;
-}
+  return mutate;
+};

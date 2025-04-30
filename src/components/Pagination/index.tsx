@@ -40,9 +40,14 @@ export function Pagination({
         <span>{totalPages || "-"}</span>
       </div>
 
-      <div className="paginatioButtons">
-        <button onClick={prevPage}><i className="material-icons">arrow_back_ios</i></button>
-        <button onClick={nextPage}><i className="material-icons">arrow_forward_ios</i></button>
+      <div className="paginationButtons">
+        <button onClick={prevPage}>
+          <i className="material-icons">arrow_back_ios</i>
+        </button>
+
+        <button onClick={nextPage}>
+          <i className="material-icons">arrow_forward_ios</i>
+        </button>
       </div>
     </Container>
   );

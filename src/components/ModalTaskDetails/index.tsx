@@ -1,4 +1,4 @@
-import { KeyboardEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { Container } from "./style";
 import { FormMutationTask } from "../FormMutationTask";
 
@@ -26,6 +26,7 @@ export function ModalTaskDetails({ toggleModal }: ModalTaskDetailsProps) {
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, [toggleModal]);
+
   return (
     <Container onClick={toggleModal}>
       <div className="handleTaskContainer" onClick={toggleModal}>

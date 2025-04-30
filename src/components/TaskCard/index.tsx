@@ -1,4 +1,3 @@
-import React from "react";
 import { TaskDataTypes } from "../../@types/tasks";
 import { Container } from "./style";
 
@@ -10,8 +9,9 @@ type TaskCardProps = {
 export function TaskCard({ data, onClick }: TaskCardProps) {
   const { title, description, date, status } = data;
 
-  const isCompleted = status === "completed";
+  const isCompleted = status == "completed";
   const isLate = !isCompleted && new Date(date) < new Date();
+
   const taskStatus = isCompleted ? "completed" : isLate ? "late" : "pending";
 
   const ptTaskStatus = {

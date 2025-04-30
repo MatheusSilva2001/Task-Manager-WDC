@@ -2,14 +2,14 @@ import { Container } from "./style";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
+import { useTaskCreate } from "../../hooks/useTaskCreate";
 import { useEffect } from "react";
+import { useTask } from "../../hooks/useTask";
 import { updateDate3HoursAgo } from "../../utils/updateDate3HoursAgo";
 import { toast } from "react-toastify";
-import { TaskDataTypes } from "../../@types/tasks";
-import { useTaskCreate } from "../../hooks/useTaskCreate";
-import { useQueryTasks } from "../../hooks/useQueryTask";
-import { useTask } from "../../hooks/useTask";
 import { useTaskUpdate } from "../../hooks/useTaskUpdate";
+import { TaskDataTypes } from "../../@types/tasks";
+import { useQueryTasks } from "../../hooks/useQueryTask";
 
 type Inputs = TaskDataTypes & { time: string };
 
@@ -18,10 +18,7 @@ type PropsToForm = {
   toggleModal?: () => void;
 };
 
-export function FormMutationTask({
-  isUpdate = false,
-  toggleModal,
-}: PropsToForm) {
+export function FormMutationTask({ isUpdate = false, toggleModal }: PropsToForm) {
   const {
     register,
     handleSubmit,
@@ -35,6 +32,8 @@ export function FormMutationTask({
 
   const { refetchQueryTask } = useQueryTasks();
   const { taskData, deleteTask, isLoading } = useTask();
+
+
 
   async function handleDeleteTask(id?: string) {
     if (id && toggleModal) {
@@ -57,8 +56,6 @@ export function FormMutationTask({
     const { title, description, date, time, status } = data;
 
     const dateAndTime = new Date(new Date(date + " " + time)).toISOString();
-
-    console.log(isUpdate);
 
     if (isUpdate) {
       mutateTaskUpdate.mutate({
@@ -116,7 +113,7 @@ export function FormMutationTask({
           Título:
           <input
             type="text"
-            placeholder="Digite o título da tarefa"
+            placeholder="digite o título da tarefa"
             autoFocus={!isUpdate}
             {...register("title", {
               required: "Campo obrigatório",

@@ -7,7 +7,7 @@ export function CreateTasks() {
       <h1>Create Tasks</h1>
 
       <div className="formContainer">
-        <FormMutationTask/>
+        <FormMutationTask />
       </div>
     </Container>
   );

@@ -6,7 +6,6 @@ import { useQueryUser } from "../../hooks/useQueryUser";
 export function Home() {
   const { data } = useQueryUser();
 
-
   return (
     <Container>
       <h2>Tarefas</h2>
@@ -21,6 +20,7 @@ export function Home() {
             total={data?.tasksInfo.total}
           />
         </NavLink>
+
         <NavLink to="/tasks?filter=pending&page=1">
           <StatsCard
             title="Pendentes"
@@ -30,6 +30,7 @@ export function Home() {
             total={data?.tasksInfo.total}
           />
         </NavLink>
+
         <NavLink to="/tasks?filter=late&page=1">
           <StatsCard
             title="Atrasadas"
@@ -39,6 +40,7 @@ export function Home() {
             total={data?.tasksInfo.total}
           />
         </NavLink>
+
         <NavLink to="/tasks?filter=all&page=1">
           <StatsCard
             title="Total"

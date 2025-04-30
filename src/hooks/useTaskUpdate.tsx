@@ -13,9 +13,8 @@ export const useTaskUpdate = () => {
     mutationFn: updateTask,
     onSuccess: () => {
       toast.dismiss();
-      toast.success("Tarefa atualizada com sucesso!");
+      toast.success("Tarefa atualizada com sucesso");
     },
-
     onError: () => {
       toast.dismiss();
       toast.error("Erro ao atualizar tarefa");

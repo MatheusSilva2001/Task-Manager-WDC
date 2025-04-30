@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Container } from "./style";
 import { Link } from "react-router-dom";
-import logoRJ from "../../assets/logo-rj.png"
+import logoRJ from "../../assets/logo-rj.png";
 import { SideBar } from "../SideBar";
 
 export function Header() {
@@ -16,13 +16,14 @@ export function Header() {
       handleToggleSideBar();
     }
   }
+
   return (
     <Container>
       <i
         className="material-icons menuIcon"
         onClick={handleToggleSideBar}
-        tabIndex={0}
         onKeyUp={handleKeyUp}
+        tabIndex={0}
       >
         menu
       </i>
@@ -32,7 +33,7 @@ export function Header() {
         <img src={logoRJ} alt="logo reprograma jucas" />
       </Link>
 
-      {showSideBar && <SideBar handleToggleSideBar={handleToggleSideBar}/>}
+      {showSideBar && <SideBar handleToggleSideBar={handleToggleSideBar} />}
     </Container>
   );
 }
