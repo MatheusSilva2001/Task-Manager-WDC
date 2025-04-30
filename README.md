@@ -28,7 +28,7 @@ Task Manager is a Full-Stack application developed in `React` and `Node.js` to c
 
 ```bash
 # clone the repository
-$ git clone https://github.com/EmanuelQuintino/Task-Manager-WDC.git
+$ git clone https://github.com/MatheusSilva2001/Task-Manager-WDC
 
 # install dependencies
 $ npm install
