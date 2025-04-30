@@ -7,10 +7,10 @@ import { TaskDataTypes } from "../@types/tasks";
 
 type FilterType = "all" | "completed" | "pending" | "late";
 type GetTasksProps = {
-    page: number;
-    limit: number;
-    filter: FilterType;
-}
+  page: number;
+  limit: number;
+  filter: FilterType;
+};
 
 export function useQueryTasks() {
   const [page, setPage] = useState(1);
@@ -22,7 +22,11 @@ export function useQueryTasks() {
   const location = useLocation();
   const searchParams = useSearchParams();
 
-  async function getTasks({ page = 1, limit = 10, filter = "all" }: GetTasksProps) {
+  async function getTasks({
+    page = 1,
+    limit = 10,
+    filter = "all",
+  }: GetTasksProps) {
     if (page <= 0) page = 1;
     const offset = (page - 1) * limit;
 
@@ -82,20 +86,23 @@ export function useQueryTasks() {
 
     if (totalPages > 0) {
       if (pageQuery > totalPages) {
-        navigate(`/tasks?page=${totalPages}&filter=${filter}`);
+        navigate(`?filter=${filterQuery}&page=${totalPages}`);
         setPage(totalPages);
-        return
+        return;
       }
+
       if (pageQuery < 1) {
-        navigate(`/tasks?page=${filterQuery}&filter=${filter}`);
-        setPage(totalPages);
+        navigate(`?filter=${filterQuery}&page=1`);
+        setPage(1);
+        return;
       }
     }
   }, [page, totalPages, searchParams, navigate, location]);
 
   const query = useQuery({
-    queryKey: ["tasksData"],
-    queryFn: () => getTasks({ page, limit, filter}),
+    queryKey: ["tasksData", page, limit, filter],
+    queryFn: () => getTasks({ page, limit, filter }),
+    refetchInterval: 1000 * 60 * 1, // 1 minute,
   });
 
   return {
